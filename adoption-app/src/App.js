@@ -1,8 +1,6 @@
-/* 
-child as rendered within APP
-NB: one-way data flow ##
-child pet now accepting props from parent APP
-*/
+import React from "react";
+import { render } from "react-dom";
+
 const Pet = (props) => {
   return React.createElement("div", {}, [
     React.createElement("h1", {}, props.name),
@@ -33,4 +31,5 @@ const App = () => {
   ]);
 };
 
-ReactDOM.render(React.createElement(App), document.getElementById("root"));
+// ReactDOM.render(React.createElement(App), document.getElementById("root")); now imported at file head
+render(React.createElement(App), document.getElementById("root"));
