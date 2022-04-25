@@ -26,7 +26,12 @@ const SearchParams = () => {
 
   return (
     <div className="search-params">
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          requestPets();
+        }}
+      >
         {/*controlled form - value and handler provided (demonstrating hooks)
         uncontrolled form <form onSubmit{(e)=>{e.**}/>*/}
         <label htmlFor="location">
