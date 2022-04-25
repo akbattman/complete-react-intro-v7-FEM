@@ -1,13 +1,27 @@
-import { useState } from "react"; //hook
+import { useEffect, useState } from "react"; //hooks
+import Pet from "./Pet";
 
-const ANIMALS = ["bird", "reptile", "fish", "dog", "cat"];
+const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
-  // const location = "Emsworth, Hants";
-  const { location, setLocation } = useState("");
-  const { animal, setAnimal } = useState("");
-  const { breed, setBreed } = useState("");
-  const allBreeds = ["Setter", "Daschund"];
+  const [location, setLocation] = useState("");
+  const [animal, setAnimal] = useState("");
+  const [breed, setBreed] = useState("");
+  const breeds = [];
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    requestPets();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function requestPets() {
+    const res = await fetch(
+      `http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
+    );
+    const json = await res.json();
+
+    setPets(json.pets);
+  }
 
   return (
     <div className="search-params">
@@ -19,7 +33,7 @@ const SearchParams = () => {
           <input
             id="location"
             value={location}
-            placeholder="location"
+            placeholder="Location"
             onChange={(e) => setLocation(e.target.value)}
           />
         </label>
@@ -55,7 +69,7 @@ const SearchParams = () => {
         </label>
 
         <label htmlFor="breed">
-          breed
+          Breed
           <select
             id="breed"
             value={breed}
@@ -63,7 +77,7 @@ const SearchParams = () => {
             onBlur={(e) => setBreed(e.target.value)}
           >
             <option />
-            {allBreeds.map((breed) => (
+            {breeds.map((breed) => (
               <option key={breed} value={breed}>
                 {breed}
               </option>
@@ -72,6 +86,14 @@ const SearchParams = () => {
         </label>
         <button>Submit</button>
       </form>
+      {pets.map((pet) => (
+        <Pet
+          name={pet.name}
+          animal={pet.animal}
+          breed={pet.breed}
+          key={pet.id}
+        />
+      ))}
     </div>
   );
 };
