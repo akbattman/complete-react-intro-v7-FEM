@@ -7,9 +7,10 @@ export default function useBreedList(animal) {
   const [breedList, setBreedList] = useState([]);
   const [status, setStatus] = useState("unloaded");
 
-  useEffect(() => {
-    alert(status);
-  }, [status]);
+  // // just to demo react loads - alerts = 💩
+  // useEffect(() => {
+  //   alert(status);
+  // }, [status]);
 
   useEffect(() => {
     if (!animal) {
