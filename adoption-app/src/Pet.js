@@ -1,4 +1,5 @@
 // import React from "react";
+import { Link } from "react-router-dom"; // replacing <a>anchor tags to prevent full app reloads, navigate render clientside and introduce additional react logics
 
 // const Pet = (props) => {
 //   return React.createElement("div", {}, [
@@ -26,7 +27,10 @@ const Pet = ({ name, animal, breed, images, location, id }) => {
     //   <h2>{props.animal}</h2>
     //   <h2>{props.breed}</h2>
     // </div>
-    <a href={`/details/${id}`} className="pet">
+
+    // <a href={`/details/${id}`} className="pet">
+    // //react router link logic replacement // compiles to an <anchor>
+    <Link to={`/details/${id}`} className="pet">
       <div className="image-container">
         <img src={hero} alt={name} />
       </div>
@@ -38,7 +42,8 @@ const Pet = ({ name, animal, breed, images, location, id }) => {
           — ${location}`}
         </h2>
       </div>
-    </a>
+    </Link>
+    // </a>
   );
 };
 
