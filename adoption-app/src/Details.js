@@ -10,12 +10,14 @@ import { useParams } from "react-router-dom";
 
 // Class component - does not use any hooks - useXxx
 class Details extends Component {
-  constructor(props) {
-    // anytime in a constructor MUST PASS PROPS TO REACT - even without any properties in props, Details is child of Component
-    super(props);
+  // constructor(props) {
+  //   // anytime in a constructor MUST PASS PROPS TO REACT - even without any properties in props, Details is child of Component
+  //   super(props);
 
-    this.state = { loading: true };
-  }
+  //   this.state = { loading: true };
+  // }
+
+  state = { loading: true }; // constructor replacement due to babel plugin class-properties
 
   // lifecycle method - "effectively useEffect" - runs after render completes
   async componentDidMount() {
