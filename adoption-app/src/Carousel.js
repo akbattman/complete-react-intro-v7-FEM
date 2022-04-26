@@ -12,9 +12,8 @@ class Carousel extends Component {
   };
 
   handleIndexClick = (e) => {
-    // e.preventDefault;
     this.setState({
-      active: +e.target.dataset.index,
+      active: +e.target.dataset.index, // + simple way to convert string "#no" to numeral ## MDN DOCS REVISE ##
     });
   };
 
@@ -27,7 +26,7 @@ class Carousel extends Component {
         <img src={images[active]} alt="animal" />
         <div className="carousel-smaller">
           {images.map((photo, index) => (
-            //eslint-disable-next-line
+            // eslint-disable-next-line
             <img
               onClick={this.handleIndexClick}
               key={photo}

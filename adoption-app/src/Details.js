@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { useParams } from "react-router-dom";
 import Carousel from "./Carousel";
+import ErrorBoundary from "./ErrorBoundary";
 
 // // function component replacing ##
 // const Details = () => {
@@ -41,6 +42,8 @@ class Details extends Component {
       return <h2>loading _</h2>;
     }
 
+    throw new Error("B0000M");
+
     const { animal, breed, city, state, description, name, images } =
       this.state; // destructured for readability/key strokes in markup return(below)
 
@@ -65,7 +68,11 @@ class Details extends Component {
 // func comp just to get at params and add to class instance as hooks unuseable in class comp
 const WrappedDetails = () => {
   const params = useParams();
-  return <Details params={params} />;
+  return (
+    <ErrorBoundary>
+      <Details params={params} />;
+    </ErrorBoundary>
+  );
 };
 
 export default WrappedDetails;
