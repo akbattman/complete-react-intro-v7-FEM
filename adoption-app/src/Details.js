@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { useParams } from "react-router-dom";
+import Carousel from "./Carousel";
 
 // // function component replacing ##
 // const Details = () => {
@@ -40,10 +41,12 @@ class Details extends Component {
       return <h2>loading _</h2>;
     }
 
-    const { animal, breed, city, state, description, name } = this.state; // destructured for readability/key strokes in markup return(below)
+    const { animal, breed, city, state, description, name, images } =
+      this.state; // destructured for readability/key strokes in markup return(below)
 
     return (
       <div className="details">
+        <Carousel images={images} />
         <div>
           <h1>{name}</h1>
           <h2>
@@ -59,6 +62,7 @@ class Details extends Component {
   }
 }
 
+// func comp just to get at params and add to class instance as hooks unuseable in class comp
 const WrappedDetails = () => {
   const params = useParams();
   return <Details params={params} />;
