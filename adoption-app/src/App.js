@@ -1,9 +1,10 @@
 // import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { StrictMode } from "react";
+import { StrictMode, useState } from "react";
 import SearchParams from "./SearchParams";
 import Details from "./Details"; // ? how is Detials read now details is wrapped export ?
+import ThemeContext from "./ThemeContext";
 
 // const App = () => {
 //   return React.createElement("div", {}, [
@@ -27,17 +28,22 @@ import Details from "./Details"; // ? how is Detials read now details is wrapped
 // };
 
 const App = () => {
+  const theme = useState("darkgrey");
+
   return (
     <StrictMode>
-      <BrowserRouter>
-        <header>
-          <Link to="/">Adopt Me!</Link>
-        </header>
-        <Routes>
-          <Route path="/details/:id" element={<Details />} />
-          <Route path="/" element={<SearchParams />} />
-        </Routes>
-      </BrowserRouter>
+      <ThemeContext.Provider value={theme}>
+        {/* theme available, not read */}
+        <BrowserRouter>
+          <header>
+            <Link to="/">Adopt Me!</Link>
+          </header>
+          <Routes>
+            <Route path="/details/:id" element={<Details />} />
+            <Route path="/" element={<SearchParams />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeContext.Provider>
       {/* <div>
         <h1>Adopt Me!</h1>
         <Pet name="Iris" animal="Tortoise" breed="Greek" />

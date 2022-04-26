@@ -42,7 +42,7 @@ class Details extends Component {
       return <h2>loading _</h2>;
     }
 
-    throw new Error("B0000M");
+    // throw new Error("TEST - B0000M - DEMO");
 
     const { animal, breed, city, state, description, name, images } =
       this.state; // destructured for readability/key strokes in markup return(below)
@@ -69,6 +69,7 @@ class Details extends Component {
 const WrappedDetails = () => {
   const params = useParams();
   return (
+    // boundary must be on parent component to catch otherwise boundary collapses with the error.
     <ErrorBoundary>
       <Details params={params} />;
     </ErrorBoundary>
