@@ -17,12 +17,28 @@ class Details extends Component {
     this.state = { loading: true };
   }
 
+  // lifecycle method - "effectively useEffect" - runs after render completes
+  async componentDidMount() {
+    const res = await fetch(
+      `http://pets-v2.dev-apis.com/pets?id=${this.props.params.id}`
+    );
+    const json = await res.json();
+
+    // this.setState({ loading: false });
+
+    // this.setState(json.pets[0]);
+
+    // guarantees react batch loads setState avoiding render x2
+    this.setState(Object.assign({ loading: false }, json.pets[0]));
+    // this.setState({ loading: false, ...json.pets[0] });  ## OBJECT SPREAD - MDN REVISE
+  }
+
   render() {
     if (this.state.loading) {
       return <h2>loading _</h2>;
     }
 
-    const { animal, breed, city, state, description, name, id } = this.state; // destructured for readability/key strokes in markup return
+    const { animal, breed, city, state, description, name } = this.state; // destructured for readability/key strokes in markup return(below)
 
     return (
       <div className="details">
@@ -41,4 +57,9 @@ class Details extends Component {
   }
 }
 
-export default Details;
+const WrappedDetails = () => {
+  const params = useParams();
+  return <Details params={params} />;
+};
+
+export default WrappedDetails;

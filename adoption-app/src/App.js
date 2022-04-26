@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { StrictMode } from "react";
 import SearchParams from "./SearchParams";
-import Details from "./Details";
+import Details from "./Details"; // ? how is Detials read now details is wrapped export ?
 
 // const App = () => {
 //   return React.createElement("div", {}, [
