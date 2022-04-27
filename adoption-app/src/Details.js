@@ -71,14 +71,14 @@ class Details extends Component {
               </button>
             )}
           </ThemeContext.Consumer>
-          ;{/* <button>Adopt {name}</button> */}
+          {/* <button>Adopt {name}</button> */}
           <p>{description}</p>
           {showModal ? (
             <Modal>
               <div>
                 <h1>Adopting {name}?</h1>
                 <div className="buttons">
-                  <a href="">Yes</a>
+                  <a href="https://bit.ly/pet-adopt">Yes</a>
                   <button onClick={this.toggleModal}>No</button>
                 </div>
               </div>
