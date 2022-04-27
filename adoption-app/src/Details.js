@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import ThemeContext from "./ThemeContext";
+import Modal from "./Modal";
 
 // // function component replacing ##
 // const Details = () => {
@@ -20,7 +21,7 @@ class Details extends Component {
   //   this.state = { loading: true };
   // }
 
-  state = { loading: true }; // constructor replacement due to babel plugin class-properties
+  state = { loading: true, showModal: false }; // constructor replacement due to babel plugin class-properties
 
   // lifecycle method - "effectively useEffect" - runs after render completes
   async componentDidMount() {
@@ -38,6 +39,8 @@ class Details extends Component {
     // this.setState({ loading: false, ...json.pets[0] });  ## OBJECT SPREAD - MDN REVISE
   }
 
+  toggleModal = () => this.setState({ showModal: !this.state.showModal });
+
   render() {
     if (this.state.loading) {
       return <h2>loading _</h2>;
@@ -45,7 +48,7 @@ class Details extends Component {
 
     // throw new Error("TEST - B0000M - DEMO");
 
-    const { animal, breed, city, state, description, name, images } =
+    const { animal, breed, city, state, description, name, images, showModal } =
       this.state; // destructured for readability/key strokes in markup return(below)
 
     return (
@@ -60,11 +63,27 @@ class Details extends Component {
           </h2>
           <ThemeContext.Consumer>
             {([theme]) => (
-              <button style={{ backgroundColor: theme }}>Adopt {name}</button>
+              <button
+                onClick={this.toggleModal}
+                style={{ backgroundColor: theme }}
+              >
+                Adopt {name}
+              </button>
             )}
           </ThemeContext.Consumer>
           ;{/* <button>Adopt {name}</button> */}
           <p>{description}</p>
+          {showModal ? (
+            <Modal>
+              <div>
+                <h1>Adopting {name}?</h1>
+                <div className="buttons">
+                  <a href="">Yes</a>
+                  <button onClick={this.toggleModal}>No</button>
+                </div>
+              </div>
+            </Modal>
+          ) : null}
         </div>
       </div>
     );
